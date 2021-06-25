@@ -5,19 +5,45 @@
  */
 package project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author farul
  */
 public class formSiswa extends javax.swing.JFrame {
-
+    Connection koneksi;
+    PreparedStatement pst;
+    ResultSet rst;
     /**
      * Creates new form formSiswa
      */
     public formSiswa() {
         initComponents();
+        koneksi=Database.DataBase();
+        showTable();
+        txtnis.setDocument(new limitField(5));
     }
-
+    
+    public void showTable() {
+         try {
+        String sql="select * from siswa";
+        pst=koneksi.prepareStatement(sql);
+        rst=pst.executeQuery();
+        tblsiswa.setModel(DbUtils.resultSetToTableModel(rst));
+       } catch (Exception e){ JOptionPane.showMessageDialog(null, e);}  
+    }
+    
+    private void clear(){
+        txtnis.setText("");
+        txtnama.setText("");
+        txttelepon.setText("");
+        txtalamat.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +56,7 @@ public class formSiswa extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblsiswa = new javax.swing.JTable();
         btnkembali = new javax.swing.JButton();
         txtsearch = new javax.swing.JTextField();
         txtnis = new javax.swing.JTextField();
@@ -63,7 +89,7 @@ public class formSiswa extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblsiswa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,12 +100,29 @@ public class formSiswa extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblsiswa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblsiswaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblsiswa);
 
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnkembaliActionPerformed(evt);
+            }
+        });
+
+        txtsearch.setText("Search");
+        txtsearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtsearchMouseClicked(evt);
+            }
+        });
+        txtsearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtsearchKeyReleased(evt);
             }
         });
 
@@ -100,10 +143,25 @@ public class formSiswa extends javax.swing.JFrame {
         jLabel5.setText("Jenis Kelamin");
 
         btnsimpan.setText("Simpan");
+        btnsimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsimpanActionPerformed(evt);
+            }
+        });
 
         btndelete.setText("Delete");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
 
         btnupdate.setText("Update");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,14 +183,14 @@ public class formSiswa extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtnama)
                                     .addComponent(txtnis)
                                     .addComponent(txttelepon)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(cbgender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(cbgender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,11 +253,97 @@ public class formSiswa extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         // TODO add your handling code here:
         new formMenu().setVisible(true);
     }//GEN-LAST:event_btnkembaliActionPerformed
+
+    private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
+        // TODO add your handling code here:
+        try {
+            String sql="insert into siswa (id_siswa,nama_siswa,no_telp,alamat,gender) value (?,?,?,?,?)";
+            pst=koneksi.prepareStatement(sql);
+            pst.setString(1, txtnis.getText());
+            pst.setString(2, txtnama.getText());
+            pst.setString(3, txttelepon.getText());
+            pst.setString(4, txtalamat.getText());
+            pst.setString(5, (String) cbgender.getSelectedItem());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            }
+           showTable();
+           clear();
+        
+    }//GEN-LAST:event_btnsimpanActionPerformed
+
+    private void tblsiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsiswaMouseClicked
+        // TODO add your handling code here:
+          try {
+            int row=tblsiswa.getSelectedRow();
+            String tblclick=(tblsiswa.getModel().getValueAt(row, 0).toString());
+            String sql="select * from siswa where id_siswa='"+tblclick+"'";
+            pst=koneksi.prepareStatement(sql);
+            rst=pst.executeQuery();
+            if (rst.next()) {
+            String data1=rst.getString(("id_siswa"));
+            txtnis.setText(data1);
+            String data2=rst.getString(("nama_siswa"));
+            txtnama.setText(data2);
+            String data3=rst.getString(("no_telp"));
+            txttelepon.setText(data3);
+            String data4=rst.getString(("alamat"));
+            txtalamat.setText(data4);
+            }
+          }catch (Exception e) {JOptionPane.showMessageDialog(null, e);}
+    }//GEN-LAST:event_tblsiswaMouseClicked
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+         try { 
+            String sql="delete from siswa where id_siswa=?";
+            pst=koneksi.prepareStatement(sql);
+            pst.setString(1, txtnis.getText());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Terhapus!");
+         }catch (Exception e) {JOptionPane.showMessageDialog(null, e);} 
+            showTable();
+            clear();    
+    }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        // TODO add your handling code here:
+        try {
+            String value1=txtnis.getText();
+            String value2=txtnama.getText();
+            String value3=txttelepon.getText();
+            String value4=txtalamat.getText();
+            String value5=(String) cbgender.getSelectedItem();
+            String sql="update siswa set nama_siswa='"+value2+"' ,no_telp='"+value3+"' ,alamat='"+value4+"' ,gender='"+value5+"' where id_siswa='"+value1+"'";
+            pst=koneksi.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate");
+        }catch (Exception e) { JOptionPane.showMessageDialog(null, e);}
+            showTable();
+            clear();
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void txtsearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsearchKeyReleased
+        // TODO add your handling code here:
+           try {
+            String sql="select * from siswa where nama_siswa LIKE '%"+txtsearch.getText()+"%'";
+            pst=koneksi.prepareStatement(sql);
+            rst=pst.executeQuery();
+            tblsiswa.setModel(DbUtils.resultSetToTableModel(rst));
+        } catch (Exception e){ JOptionPane.showMessageDialog(null, e);} 
+    }//GEN-LAST:event_txtsearchKeyReleased
+
+    private void txtsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtsearchMouseClicked
+        // TODO add your handling code here:
+        txtsearch.setText(null);
+    }//GEN-LAST:event_txtsearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -251,7 +395,7 @@ public class formSiswa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblsiswa;
     private javax.swing.JTextArea txtalamat;
     private javax.swing.JTextField txtnama;
     private javax.swing.JTextField txtnis;
