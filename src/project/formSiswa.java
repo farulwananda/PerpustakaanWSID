@@ -24,8 +24,10 @@ public class formSiswa extends javax.swing.JFrame {
     public formSiswa() {
         initComponents();
         koneksi=Database.DataBase();
-        showTable();
         txtnis.setDocument(new limitField(5));
+        txtnama.setDocument(new limitField(50));
+        txttelepon.setDocument(new limitField(12));
+        showTable();
     }
     
     public void showTable() {
@@ -257,10 +259,18 @@ public class formSiswa extends javax.swing.JFrame {
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         // TODO add your handling code here:
         new formMenu().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
         // TODO add your handling code here:
+        String nis = txtnis.getText();
+        String nama = txtnama.getText();
+        String telepon = txttelepon.getText();
+        String alamat = txtalamat.getText();
+        if(nis.equals("")||nama.equals("")||telepon.equals("")||alamat.equals("")){
+            JOptionPane.showMessageDialog(null,"Isi data dengan lengkap!");
+        }else{
         try {
             String sql="insert into siswa (id_siswa,nama_siswa,no_telp,alamat,gender) value (?,?,?,?,?)";
             pst=koneksi.prepareStatement(sql);
@@ -276,7 +286,7 @@ public class formSiswa extends javax.swing.JFrame {
             }
            showTable();
            clear();
-        
+        }
     }//GEN-LAST:event_btnsimpanActionPerformed
 
     private void tblsiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsiswaMouseClicked
@@ -302,6 +312,13 @@ public class formSiswa extends javax.swing.JFrame {
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
+        String nis = txtnis.getText();
+        String nama = txtnama.getText();
+        String telepon = txttelepon.getText();
+        String alamat = txtalamat.getText();
+        if(nis.equals("")||nama.equals("")||telepon.equals("")||alamat.equals("")){
+            JOptionPane.showMessageDialog(null,"Pilih data yang akan dihapus!");
+        }else{
          try { 
             String sql="delete from siswa where id_siswa=?";
             pst=koneksi.prepareStatement(sql);
@@ -311,10 +328,18 @@ public class formSiswa extends javax.swing.JFrame {
          }catch (Exception e) {JOptionPane.showMessageDialog(null, e);} 
             showTable();
             clear();    
+        }
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         // TODO add your handling code here:
+        String nis = txtnis.getText();
+        String nama = txtnama.getText();
+        String telepon = txttelepon.getText();
+        String alamat = txtalamat.getText();
+        if(nis.equals("")||nama.equals("")||telepon.equals("")||alamat.equals("")){
+            JOptionPane.showMessageDialog(null,"Pilih data yang akan diupdate!");
+        }else{
         try {
             String value1=txtnis.getText();
             String value2=txtnama.getText();
@@ -328,6 +353,7 @@ public class formSiswa extends javax.swing.JFrame {
         }catch (Exception e) { JOptionPane.showMessageDialog(null, e);}
             showTable();
             clear();
+        }
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void txtsearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsearchKeyReleased
