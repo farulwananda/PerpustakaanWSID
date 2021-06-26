@@ -136,7 +136,6 @@ public class formLogin extends javax.swing.JFrame {
         if (rst.next()) {
             if(txtusername.getText().equals(rst.getString("username"))&&txtpassword.getText().equals(rst.getString("password")))
             {  
-                JOptionPane.showMessageDialog(null, "Selamat Datang '"+txtusername.getText()+"'"); 
                 new formMenu().setVisible(true);
                 dispose();
             }

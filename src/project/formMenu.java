@@ -57,6 +57,11 @@ public class formMenu extends javax.swing.JFrame {
         });
 
         btndpeminjaman.setText("PEMINJAMAN");
+        btndpeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndpeminjamanActionPerformed(evt);
+            }
+        });
 
         btndpengembalian.setText("PENGEMBALIAN");
 
@@ -120,6 +125,11 @@ public class formMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         new formBuku().setVisible(true);
     }//GEN-LAST:event_btndbukuActionPerformed
+
+    private void btndpeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndpeminjamanActionPerformed
+        // TODO add your handling code here:
+        new formPeminjaman().setVisible(true);
+    }//GEN-LAST:event_btndpeminjamanActionPerformed
 
     /**
      * @param args the command line arguments
