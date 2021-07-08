@@ -31,14 +31,16 @@ public class formMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btndsiswa = new javax.swing.JButton();
         btndbuku = new javax.swing.JButton();
         btndpeminjaman = new javax.swing.JButton();
         btndpengembalian = new javax.swing.JButton();
+        btndsiswa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(238, 242, 243));
+
+        jPanel2.setBackground(new java.awt.Color(0, 180, 219));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("MAIN MENU");
@@ -50,25 +52,19 @@ public class formMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(378, 378, 378))
+                .addGap(376, 376, 376))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(238, 242, 243));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btndsiswa.setText("DATA SISWA");
-        btndsiswa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndsiswaActionPerformed(evt);
-            }
-        });
-
+        btndbuku.setBackground(new java.awt.Color(41, 128, 185));
         btndbuku.setText("DATA BUKU");
         btndbuku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +72,7 @@ public class formMenu extends javax.swing.JFrame {
             }
         });
 
+        btndpeminjaman.setBackground(new java.awt.Color(41, 128, 185));
         btndpeminjaman.setText("PEMINJAMAN");
         btndpeminjaman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,10 +80,19 @@ public class formMenu extends javax.swing.JFrame {
             }
         });
 
+        btndpengembalian.setBackground(new java.awt.Color(41, 128, 185));
         btndpengembalian.setText("PENGEMBALIAN");
         btndpengembalian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndpengembalianActionPerformed(evt);
+            }
+        });
+
+        btndsiswa.setBackground(new java.awt.Color(41, 128, 185));
+        btndsiswa.setText("DATA SISWA");
+        btndsiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndsiswaActionPerformed(evt);
             }
         });
 
@@ -112,14 +118,14 @@ public class formMenu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btndsiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btndbuku, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btndbuku, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btndsiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btndpeminjaman, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                             .addComponent(btndpengembalian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -136,7 +142,7 @@ public class formMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -149,17 +155,11 @@ public class formMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btndsiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndsiswaActionPerformed
-        // TODO add your handling code here:
-        new formSiswa().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btndsiswaActionPerformed
 
     private void btndbukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndbukuActionPerformed
         // TODO add your handling code here:
@@ -178,6 +178,12 @@ public class formMenu extends javax.swing.JFrame {
         new formPengembalian().setVisible(true);
         dispose();
     }//GEN-LAST:event_btndpengembalianActionPerformed
+
+    private void btndsiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndsiswaActionPerformed
+        // TODO add your handling code here:
+        new formSiswa().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btndsiswaActionPerformed
 
     /**
      * @param args the command line arguments

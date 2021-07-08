@@ -93,6 +93,7 @@ public class formPenerbit extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
+        tblpenerbit.setBackground(new java.awt.Color(238, 242, 243));
         tblpenerbit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -106,6 +107,7 @@ public class formPenerbit extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblpenerbit);
 
+        btnkembali.setBackground(new java.awt.Color(41, 128, 185));
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +126,8 @@ public class formPenerbit extends javax.swing.JFrame {
                 txtsearchKeyReleased(evt);
             }
         });
+
+        jPanel3.setBackground(new java.awt.Color(238, 242, 243));
 
         jLabel2.setText("ID Penerbit");
 
@@ -158,6 +162,7 @@ public class formPenerbit extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        btnsimpan.setBackground(new java.awt.Color(41, 128, 185));
         btnsimpan.setText("Simpan");
         btnsimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +170,7 @@ public class formPenerbit extends javax.swing.JFrame {
             }
         });
 
+        btnupdate.setBackground(new java.awt.Color(41, 128, 185));
         btnupdate.setText("Update");
         btnupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +178,7 @@ public class formPenerbit extends javax.swing.JFrame {
             }
         });
 
+        btndelete.setBackground(new java.awt.Color(41, 128, 185));
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

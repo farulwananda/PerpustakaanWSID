@@ -31,18 +31,32 @@ public class formPengembalian extends javax.swing.JFrame {
     public formPengembalian() {
         initComponents();
         koneksi=Database.DataBase();
+        txtid.setDocument(new limitField(5));
+        txtadmin.setDocument(new limitField(5));
+        txtsanksi.setDocument(new limitField(30));
+        txtbayar.setDocument(new limitField(10));
         showTable();
+        showTable2();
         clear();
     }
     
      public void showTable() {
          try {
-        String sql="select * from peminjaman";
+        String status = "Sedang Dipinjam";
+        String sql="select * from peminjaman where status = '"+status+"'";
         pst=koneksi.prepareStatement(sql);
         rst=pst.executeQuery();
         tblpeminjaman.setModel(DbUtils.resultSetToTableModel(rst));
        } catch (Exception e){ JOptionPane.showMessageDialog(null, e);}  
     }
+     public void showTable2() {
+         try {
+        String sql="select * from pengembalian";
+        pst=koneksi.prepareStatement(sql);
+        rst=pst.executeQuery();
+        tblpengembalian.setModel(DbUtils.resultSetToTableModel(rst));
+       } catch (Exception e){ JOptionPane.showMessageDialog(null, e);}  
+     }
     
      public void clear() {
        txtid.setText("");
@@ -102,6 +116,8 @@ public class formPengembalian extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel2.setBackground(new java.awt.Color(0, 180, 219));
+
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel9.setText("PENGEMBALIAN");
 
@@ -109,10 +125,10 @@ public class formPengembalian extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(346, 346, 346)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(339, 339, 339))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,6 +156,7 @@ public class formPengembalian extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblpeminjaman);
 
+        btnkembali.setBackground(new java.awt.Color(41, 128, 185));
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +184,8 @@ public class formPengembalian extends javax.swing.JFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(238, 242, 243));
+
         datebalik.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 datebalikPropertyChange(evt);
@@ -181,6 +200,7 @@ public class formPengembalian extends javax.swing.JFrame {
 
         jLabel4.setText("Buku Kembali");
 
+        btnbayar.setBackground(new java.awt.Color(41, 128, 185));
         btnbayar.setText("$");
         btnbayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,6 +339,7 @@ public class formPengembalian extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        btnsimpan.setBackground(new java.awt.Color(41, 128, 185));
         btnsimpan.setText("Simpan");
         btnsimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,6 +347,7 @@ public class formPengembalian extends javax.swing.JFrame {
             }
         });
 
+        btnclear.setBackground(new java.awt.Color(41, 128, 185));
         btnclear.setText("Clear");
         btnclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -555,7 +577,8 @@ public class formPengembalian extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+        showTable();
+        showTable2();
     }//GEN-LAST:event_btnsimpanActionPerformed
     
     /**
