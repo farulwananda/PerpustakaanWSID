@@ -52,7 +52,7 @@
                       <Component id="btnkembali" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="btndelete" min="-2" pref="75" max="-2" attributes="0"/>
@@ -61,7 +61,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnupdate" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnsimpan" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnsimpan" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -226,8 +226,8 @@
                           <Component id="txtnama" max="32767" attributes="0"/>
                           <Component id="txtnis" max="32767" attributes="0"/>
                           <Component id="txttelepon" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbgender" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="cbgender" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>

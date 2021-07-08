@@ -50,7 +50,7 @@ public class formOverall extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblhistory = new javax.swing.JTable();
-        txtsearch = new javax.swing.JTextField();
+        Search = new javax.swing.JTextField();
         btnkembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,18 +92,19 @@ public class formOverall extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblhistory);
 
-        txtsearch.setText("Search");
-        txtsearch.addMouseListener(new java.awt.event.MouseAdapter() {
+        Search.setText("Search");
+        Search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtsearchMouseClicked(evt);
+                SearchMouseClicked(evt);
             }
         });
-        txtsearch.addKeyListener(new java.awt.event.KeyAdapter() {
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtsearchKeyReleased(evt);
+                SearchKeyReleased(evt);
             }
         });
 
+        btnkembali.setBackground(new java.awt.Color(41, 128, 185));
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +120,7 @@ public class formOverall extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnkembali)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -129,7 +130,7 @@ public class formOverall extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtsearch, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,20 +158,20 @@ public class formOverall extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
 
-    private void txtsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtsearchMouseClicked
+    private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
         // TODO add your handling code here:
-         txtsearch.setText(null);
-    }//GEN-LAST:event_txtsearchMouseClicked
+         Search.setText(null);
+    }//GEN-LAST:event_SearchMouseClicked
 
-    private void txtsearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsearchKeyReleased
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
         // TODO add your handling code here:
          try {
-            String sql="select * from peminjaman where id_siswa LIKE '%"+txtsearch.getText()+"%'";
+            String sql="select * from peminjaman where id_siswa LIKE '%"+Search.getText()+"%'";
             pst=koneksi.prepareStatement(sql);
             rst=pst.executeQuery();
             tblhistory.setModel(DbUtils.resultSetToTableModel(rst));
         } catch (Exception e){ JOptionPane.showMessageDialog(null, e);} 
-    }//GEN-LAST:event_txtsearchKeyReleased
+    }//GEN-LAST:event_SearchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -208,12 +209,12 @@ public class formOverall extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Search;
     private javax.swing.JButton btnkembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblhistory;
-    private javax.swing.JTextField txtsearch;
     // End of variables declaration//GEN-END:variables
 }
