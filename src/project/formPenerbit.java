@@ -25,6 +25,7 @@ public class formPenerbit extends javax.swing.JFrame {
     public formPenerbit() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         showTable();
     }
     
@@ -105,6 +106,11 @@ public class formPenerbit extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblpenerbit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblpenerbitMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblpenerbit);
 
         btnkembali.setBackground(new java.awt.Color(41, 128, 185));
@@ -328,6 +334,24 @@ public class formPenerbit extends javax.swing.JFrame {
         new formBuku().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
+
+    private void tblpenerbitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpenerbitMouseClicked
+        // TODO add your handling code here:
+         try {
+            int row=tblpenerbit.getSelectedRow();
+            String tblclick=(tblpenerbit.getModel().getValueAt(row, 0).toString());
+            String sql="select * from penerbit where id_penerbit='"+tblclick+"'";
+            pst=koneksi.prepareStatement(sql);
+            rst=pst.executeQuery();
+            if (rst.next()) {
+            String data1=rst.getString(("id_penerbit"));
+            txtid.setText(data1);
+            String data2=rst.getString(("penerbit"));
+            txtpenerbit.setText(data2);
+            
+            }
+          }catch (Exception e) {JOptionPane.showMessageDialog(null, e);}
+    }//GEN-LAST:event_tblpenerbitMouseClicked
 
     /**
      * @param args the command line arguments

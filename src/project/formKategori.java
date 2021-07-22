@@ -105,6 +105,11 @@ public class formKategori extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblkategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblkategoriMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblkategori);
 
         btnkembali.setBackground(new java.awt.Color(41, 128, 185));
@@ -275,7 +280,7 @@ public class formKategori extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Isi data dengan lengkap!");
         }else{
         try {
-            String sql="insert into kategori (id_penerbit,kategori) value (?,?)";
+            String sql="insert into kategori (id_kategori,kategori) value (?,?)";
             pst=koneksi.prepareStatement(sql);
             pst.setString(1, txtid.getText());
             pst.setString(2, txtkategori.getText());
@@ -327,6 +332,24 @@ public class formKategori extends javax.swing.JFrame {
             clear();    
         }
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void tblkategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblkategoriMouseClicked
+        // TODO add your handling code here:
+         try {
+            int row=tblkategori.getSelectedRow();
+            String tblclick=(tblkategori.getModel().getValueAt(row, 0).toString());
+            String sql="select * from kategori where id_kategori='"+tblclick+"'";
+            pst=koneksi.prepareStatement(sql);
+            rst=pst.executeQuery();
+            if (rst.next()) {
+            String data1=rst.getString(("id_kategori"));
+            txtid.setText(data1);
+            String data2=rst.getString(("kategori"));
+            txtkategori.setText(data2);
+            
+            }
+          }catch (Exception e) {JOptionPane.showMessageDialog(null, e);}
+    }//GEN-LAST:event_tblkategoriMouseClicked
 
     /**
      * @param args the command line arguments
