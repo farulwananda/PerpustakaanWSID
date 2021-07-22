@@ -24,6 +24,7 @@ public class formLogin extends javax.swing.JFrame {
     public formLogin() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         txtusername.setDocument(new limitField(10));
         txtpassword.setDocument(new limitField(10));
     }

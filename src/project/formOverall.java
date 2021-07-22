@@ -6,10 +6,20 @@
 package project;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -25,6 +35,7 @@ public class formOverall extends javax.swing.JFrame {
     public formOverall() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         showTable();
     }
     
@@ -52,6 +63,7 @@ public class formOverall extends javax.swing.JFrame {
         tblhistory = new javax.swing.JTable();
         Search = new javax.swing.JTextField();
         btnkembali = new javax.swing.JButton();
+        btncetak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +124,14 @@ public class formOverall extends javax.swing.JFrame {
             }
         });
 
+        btncetak.setBackground(new java.awt.Color(41, 128, 185));
+        btncetak.setText("Print");
+        btncetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncetakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,9 +139,12 @@ public class formOverall extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btncetak, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnkembali)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -134,7 +157,9 @@ public class formOverall extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnkembali)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnkembali)
+                    .addComponent(btncetak))
                 .addGap(6, 6, 6))
         );
 
@@ -173,6 +198,32 @@ public class formOverall extends javax.swing.JFrame {
         } catch (Exception e){ JOptionPane.showMessageDialog(null, e);} 
     }//GEN-LAST:event_SearchKeyReleased
 
+    private void btncetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncetakActionPerformed
+        // TODO add your handling code here:
+          try {                                         
+            // TODO add your handling code here:
+            Connection conn = null;
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(formOverall.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/db_perpustakaanv1", "root", "");
+            } catch (SQLException ex) {
+                Logger.getLogger(formOverall.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String file = "D:\\Dev\\PerpustakaanWSID\\src\\project\\Report.jrxml";
+            JasperReport jr;
+            
+            jr = JasperCompileManager.compileReport(file);
+            JasperPrint jp = JasperFillManager.fillReport(jr,null, conn);
+            JasperViewer.viewReport(jp);
+        } catch (JRException ex) {
+            Logger.getLogger(formOverall.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btncetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +261,7 @@ public class formOverall extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Search;
+    private javax.swing.JButton btncetak;
     private javax.swing.JButton btnkembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

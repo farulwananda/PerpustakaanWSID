@@ -25,6 +25,7 @@ public class formKategori extends javax.swing.JFrame {
     public formKategori() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         showTable();
     }
     
@@ -262,6 +263,7 @@ public class formKategori extends javax.swing.JFrame {
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         // TODO add your handling code here:
+        new formBuku().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
 

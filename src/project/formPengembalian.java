@@ -31,6 +31,7 @@ public class formPengembalian extends javax.swing.JFrame {
     public formPengembalian() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         txtid.setDocument(new limitField(5));
         txtadmin.setDocument(new limitField(5));
         txtsanksi.setDocument(new limitField(30));

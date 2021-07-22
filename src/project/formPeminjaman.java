@@ -31,6 +31,7 @@ public class formPeminjaman extends javax.swing.JFrame {
     public formPeminjaman() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         txtnis.setDocument(new limitField(5));
         txtadmin.setDocument(new limitField(5));
         showTable();

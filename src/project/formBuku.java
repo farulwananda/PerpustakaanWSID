@@ -28,6 +28,7 @@ public class formBuku extends javax.swing.JFrame {
     public formBuku() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         txtkode.setDocument(new limitField(5));
         txtjudul.setDocument(new limitField(50));
         txtpengarang.setDocument(new limitField(50));
@@ -282,10 +283,10 @@ public class formBuku extends javax.swing.JFrame {
                     .addComponent(txttahun, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(13, 13, 13)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(btnpenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbpenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnpenerbit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbpenerbit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnkategori, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -529,11 +530,13 @@ public class formBuku extends javax.swing.JFrame {
     private void btnpenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpenerbitActionPerformed
         // TODO add your handling code here:
         new formPenerbit().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnpenerbitActionPerformed
 
     private void btnkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkategoriActionPerformed
         // TODO add your handling code here:
         new formKategori().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnkategoriActionPerformed
 
     /**

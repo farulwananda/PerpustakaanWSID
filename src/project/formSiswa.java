@@ -24,6 +24,7 @@ public class formSiswa extends javax.swing.JFrame {
     public formSiswa() {
         initComponents();
         koneksi=Database.DataBase();
+        setLocationRelativeTo(this);
         txtnis.setDocument(new limitField(5));
         txtnama.setDocument(new limitField(50));
         txttelepon.setDocument(new limitField(12));
