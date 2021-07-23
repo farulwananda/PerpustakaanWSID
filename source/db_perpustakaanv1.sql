@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 08 Jul 2021 pada 15.48
+-- Waktu pembuatan: 23 Jul 2021 pada 04.00
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -42,8 +42,10 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`id_buku`, `judul_buku`, `pengarang`, `tahun_terbit`, `id_penerbit`, `id_kategori`, `stok`) VALUES
-('BK001', 'Dunia Indah', 'Darwin', 2011, 'PT001', 'KT002', 6),
-('BK002', 'Filsafat X', 'Hartanto', 2018, 'PT002', 'KT003', 6);
+('BK001', 'Dunia Indah', 'Darwin', 2011, 'PT001', 'KT001', 8),
+('BK002', 'Filsafat X', 'Hartanto', 2018, 'PT002', 'KT003', 4),
+('BK005', 'Sejarah 7', 'Suryo', 2018, 'PT002', 'KT004', 7),
+('BK006', 'Matematika 7', 'Karya', 2018, 'PT001', 'KT001', 11);
 
 -- --------------------------------------------------------
 
@@ -62,11 +64,12 @@ CREATE TABLE `detail_peminjaman` (
 --
 
 INSERT INTO `detail_peminjaman` (`id_detail`, `id_buku`, `jumlah`) VALUES
-('DPJ001', 'BK001', '1'),
-('DPJ002', 'BK002', '1'),
-('DPJ003', 'BK001', '1'),
-('DPJ003', 'BK001', '1'),
-('DPJ004', 'BK003', '1');
+('DPJ004', 'BK003', '1'),
+('DPJ007', 'BK001', '1'),
+('DPJ007', 'BK003', '1'),
+('DPJ012', 'BK001', '1'),
+('DPJ013', 'BK005', '3'),
+('DPJ014', 'BK006', '1');
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,8 @@ CREATE TABLE `kategori` (
 INSERT INTO `kategori` (`id_kategori`, `kategori`) VALUES
 ('KT001', 'Matematika'),
 ('KT002', 'Bahasa'),
-('KT003', 'Filsafat');
+('KT003', 'Filsafat'),
+('KT004', 'Sejarah');
 
 -- --------------------------------------------------------
 
@@ -109,10 +113,19 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `id_detail`, `tanggal_pinjam`, `tanggal_kembali`, `status`, `id_siswa`, `id_petugas`) VALUES
-('PJ001', 'DPJ001', '2021-07-02', '2021-07-03', '', 'SI001', 'AD001'),
 ('PJ002', 'DPJ002', '2021-07-10', '2021-07-12', 'Telah Dikembalikan', 'SI001', 'AD001'),
 ('PJ003', 'DPJ003', '2021-07-03', '2021-07-04', 'Telah Dikembalikan', 'SI001', 'AD001'),
-('PJ004', 'DPJ004', '2021-07-09', '2021-07-14', 'Telah Dikembalikan', 'SI004', 'AD001');
+('PJ004', 'DPJ004', '2021-07-09', '2021-07-14', 'Telah Dikembalikan', 'SI004', 'AD001'),
+('PJ005', 'DPJ005', '2021-07-02', '2021-07-03', 'Telah Dikembalikan', 'SI001', 'AD001'),
+('PJ006', 'DPJ006', '2021-07-09', '2021-07-10', 'Sedang Dipinjam', 'SI001', 'AD001'),
+('PJ007', 'DPJ007', '2021-07-03', '2021-07-05', 'Sedang Dipinjam', 'SI005', 'AD001'),
+('PJ008', 'DPJ008', '2021-07-02', '2021-07-03', 'Telah Dikembalikan', 'SI001', 'AD001'),
+('PJ009', 'DPJ009', '2021-07-02', '2021-07-04', 'Sedang Dipinjam', 'SI002', 'AD001'),
+('PJ010', 'DPJ010', '2021-07-08', '2021-07-11', 'Telah Dikembalikan', 'SI002', 'AD001'),
+('PJ011', 'DPJ011', '2021-07-09', '2021-07-15', 'Telah Dikembalikan', 'SI002', 'AD001'),
+('PJ012', 'DPJ012', '2021-07-09', '2021-07-10', 'Sedang Dipinjam', 'SI002', 'AD001'),
+('PJ013', 'DPJ013', '2021-07-10', '2021-07-12', 'Sedang Dipinjam', 'SI004', 'AD001'),
+('PJ014', 'DPJ014', '2021-07-02', '2021-07-04', 'Telah Dikembalikan', 'SI007', 'admin');
 
 -- --------------------------------------------------------
 
@@ -132,7 +145,9 @@ CREATE TABLE `penerbit` (
 INSERT INTO `penerbit` (`id_penerbit`, `penerbit`) VALUES
 ('PT001', 'Gramedia'),
 ('PT002', 'Sinarmas'),
-('PT003', 'Duniaku');
+('PT003', 'Duniaku'),
+('PT004', 'Uranus'),
+('PT005', 'Simas');
 
 -- --------------------------------------------------------
 
@@ -156,7 +171,12 @@ CREATE TABLE `pengembalian` (
 
 INSERT INTO `pengembalian` (`id_pengembalian`, `tanggal_pinjam`, `tanggal_kembali`, `dikembalikan`, `status`, `sanksi`, `id_petugas`) VALUES
 ('PJ002', '2021-07-10', '2021-07-12', '2021-07-16', 'Telah Dikembalikan', '8000', 'AD001'),
-('PJ004', '2021-07-09', '2021-07-14', '2021-07-17', 'Telah Dikembalikan', '6000', 'AD001');
+('PJ004', '2021-07-09', '2021-07-14', '2021-07-17', 'Telah Dikembalikan', '6000', 'AD001'),
+('PJ005', '2021-07-02', '2021-07-03', '2021-07-07', 'Telah Dikembalikan', '8000', 'AD001'),
+('PJ008', '2021-07-02', '2021-07-03', '2021-07-05', 'Telah Dikembalikan', '4000', 'AD001'),
+('PJ010', '2021-07-08', '2021-07-11', '2021-07-11', 'Telah Dikembalikan', '0', 'AD001'),
+('PJ011', '2021-07-09', '2021-07-15', '2021-07-16', 'Telah Dikembalikan', '2000', 'AD001'),
+('PJ014', '2021-07-02', '2021-07-04', '2021-07-05', 'Telah Dikembalikan', '2000', 'admin');
 
 -- --------------------------------------------------------
 
@@ -179,7 +199,7 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `gender`, `no_telp`, `alamat`, `username`, `password`) VALUES
-('AD001', 'Farul Ahmad Wananda', 'Pria', '089682125741', 'Jl.Letnan Rantam Kec.Curahdami', 'admin', 'admin');
+('admin', 'Farul', 'Pria', '089682125741', 'Jl.Letnan Rantam Kec.Curahdami', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -200,9 +220,10 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nama_siswa`, `no_telp`, `alamat`, `gender`) VALUES
-('SI001', 'Matahari', '089682125741', 'Jl.Panjaitan', 'Pria'),
 ('SI002', 'Bintang', '089682124742', 'Jl.Kembang', 'Pria'),
-('SI004', 'Bunga', '089682125748', 'Bondowoso', 'Wanita');
+('SI004', 'Bunga', '089682125748', 'Bondowoso', 'Wanita'),
+('SI005', 'Kembang', '089682125750', 'Bondowoso', 'Wanita'),
+('SI007', 'Lemon', '089682112222', 'Lumajang', 'Pria');
 
 --
 -- Indexes for dumped tables
@@ -262,30 +283,6 @@ ALTER TABLE `petugas`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id_siswa`);
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `buku`
---
-ALTER TABLE `buku`
-  ADD CONSTRAINT `buku_ibfk_1` FOREIGN KEY (`id_penerbit`) REFERENCES `penerbit` (`id_penerbit`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `buku_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `peminjaman`
---
-ALTER TABLE `peminjaman`
-  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `peminjaman_ibfk_3` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id_siswa`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `pengembalian`
---
-ALTER TABLE `pengembalian`
-  ADD CONSTRAINT `pengembalian_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
